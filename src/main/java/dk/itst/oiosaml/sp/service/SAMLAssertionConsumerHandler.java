@@ -25,8 +25,6 @@ package dk.itst.oiosaml.sp.service;
 
 import java.io.IOException;
 import java.net.URLEncoder;
-import java.time.Instant;
-import java.util.Collection;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpSession;
@@ -179,7 +177,7 @@ public class SAMLAssertionConsumerHandler implements SAMLHandler {
 			Configuration conf = ctx.getConfiguration();
 			String key = conf.getString(Constants.PROP_LOGIN_TOKEN_KEY); // 获取传输加密key
 			long vaildtime = conf.getLong(Constants.PROP_LOGIN_TOKEN_VAILDTIME, 60000); // 获取token最长有效时间
-			long time = Instant.now().toEpochMilli() / vaildtime; // 时间戳处理
+			long time = System.currentTimeMillis() / vaildtime; // 时间戳处理
 			String token = MD5FileUtil.getMD5String(uid + key + time);
 			String loginRespUri = conf.getString(Constants.PROP_LOGIN_RESPONSE);
 			String url = loginRespUri + "?token=" + token + "&uid=" + uid;
