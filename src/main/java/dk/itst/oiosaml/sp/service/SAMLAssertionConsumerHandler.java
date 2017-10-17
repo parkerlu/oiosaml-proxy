@@ -169,7 +169,7 @@ public class SAMLAssertionConsumerHandler implements SAMLHandler {
 			session.setAttribute(Constants.SESSION_USER_ASSERTION, userAssertion);
 			
 			// 打印登录时放入oiosaml的sessionId
-//			System.out.println("login: put sessionId " + session.getId() + " into sessionMap");
+			System.out.println("login: put sessionId " + session.getId() + " into sessionMap");
 			
 			// 将从IDP接受到的登录用户信息加密传输给业务系统 v1.0
 //			String name = URLEncoder.encode(userAssertion.getAttribute("sn").getValue(), "UTF-8"); // 姓名
