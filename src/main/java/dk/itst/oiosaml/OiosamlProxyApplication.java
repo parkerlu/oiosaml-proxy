@@ -38,6 +38,7 @@ public class OiosamlProxyApplication {
 		ServletRegistrationBean registrationBean = new ServletRegistrationBean();
 		registrationBean.setServlet(servlet);
 		registrationBean.setLoadOnStartup(1);
+		registrationBean.setName("samlDispatcherServlet");
 		registrationBean.addUrlMappings("/saml/*");
 		return registrationBean;
 	}
