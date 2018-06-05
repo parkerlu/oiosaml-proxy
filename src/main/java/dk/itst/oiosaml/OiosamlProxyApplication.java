@@ -46,7 +46,7 @@ public class OiosamlProxyApplication {
 	@Bean
 	public ServletListenerRegistrationBean<SessionDestroyListener> getSessionDestroyListener() {
 		SessionDestroyListener listener = new SessionDestroyListener();
-		ServletListenerRegistrationBean<SessionDestroyListener> registrationBean = new ServletListenerRegistrationBean<>();
+		ServletListenerRegistrationBean<SessionDestroyListener> registrationBean = new ServletListenerRegistrationBean<SessionDestroyListener>();
 		registrationBean.setListener(listener);
 		return registrationBean;
 	}
