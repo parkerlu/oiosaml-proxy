@@ -129,11 +129,12 @@ public class SAMLAssertionConsumerHandler implements SAMLHandler {
 
 		String idpEntityId = response.getOriginatingIdpEntityId(ctx.getSessionHandler());
 		if (log.isDebugEnabled()) log.debug("Received SAML Response from " + idpEntityId + ": " + response.toXML());
-		
 		boolean allowPassive = ctx.getConfiguration().getBoolean(Constants.PROP_PASSIVE, false);
 		Metadata metadata = ctx.getIdpMetadata().getMetadata(idpEntityId);
 		response.decryptAssertion(ctx.getCredential(), !ctx.getConfiguration().getBoolean(Constants.PROP_REQUIRE_ENCRYPTION, false));
+		
 		response.validateResponse(ctx.getSpMetadata().getAssertionConsumerServiceLocation(0), metadata.getValidCertificates(), allowPassive);
+		
 		if (allowPassive && response.isPassive()) {
 			log.debug("Received passive response, setting passive userassertion");
 			Assertion assertion = SAMLUtil.buildXMLObject(Assertion.class);
@@ -143,8 +144,6 @@ public class SAMLAssertionConsumerHandler implements SAMLHandler {
 			session.setAttribute(Constants.SESSION_USER_ASSERTION, passiveUserAssertion);
 			
 			Audit.log(Operation.LOGIN, passiveUserAssertion.getSubject());
-			// 标记，以备出错排查
-			System.out.println("--- is passive ---");
 		} else {
 			OIOAssertion assertion = response.getAssertion();
 	

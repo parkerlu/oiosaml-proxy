@@ -91,15 +91,12 @@ public class OIOResponse extends OIOAbstractResponse {
 	
 	public void validateResponse(String expectedDestination, Collection<? extends Certificate> certificates, boolean allowPassive) throws ValidationException {
 		validateResponse(null, expectedDestination, allowPassive);
-		
 		if (response.getAssertions().isEmpty() && !isPassive()) {
 			throw new ValidationException("Response must contain an Assertion. If the Response contains an encrypted Assertion, decrypt it before calling validate.");
 		}
-		
 		if (!hasSignature() && isPassive()) {
 			return;
 		}
-		
 		if (hasSignature() || isPassive()) {
 			boolean valid = false;
 			for (Certificate certificate : certificates) {
@@ -119,6 +116,7 @@ public class OIOResponse extends OIOAbstractResponse {
 					}
 				}
 				if (!valid) {
+					System.out.println("validateResponse Fail");
 					throw new ValidationException("The assertion is not signed correctly");
 				}
 			}

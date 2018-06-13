@@ -198,7 +198,8 @@ public class DispatcherServlet extends HttpServlet {
 		}
 
 		String action = req.getRequestURI().substring(req.getRequestURI().lastIndexOf("/") + 1);
-		System.out.println("action："+action);
+//		System.out.println("action："+action);
+		
 		Audit.init(req);
 
 		// This is needed if DispatcherServlet isn't protected

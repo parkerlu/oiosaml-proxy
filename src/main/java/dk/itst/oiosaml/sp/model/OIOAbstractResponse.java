@@ -61,7 +61,6 @@ public class OIOAbstractResponse extends OIOSamlObject {
 	protected void validateResponse(String requestId, String expectedDestination, boolean allowPassive) {
 		String statusCode = response.getStatus().getStatusCode().getValue();
 		if (!StatusCode.SUCCESS_URI.equals(statusCode)) {
-			
 			StatusCode is = response.getStatus().getStatusCode().getStatusCode();
 			if (is == null || !(StatusCode.NO_PASSIVE_URI.equals(is.getValue()) && allowPassive)) {
 				String msg = response.getStatus().getStatusMessage() == null ? "" : response.getStatus().getStatusMessage().getMessage();
@@ -77,7 +76,6 @@ public class OIOAbstractResponse extends OIOSamlObject {
 		if (requestId != null && !requestId.equals(response.getInResponseTo())) {
 			throw new ValidationException("Wrong InResponseTo. Expected " + requestId + ", was " + response.getInResponseTo());
 		}
-
 	}
 
 	public String getInResponseTo() {
