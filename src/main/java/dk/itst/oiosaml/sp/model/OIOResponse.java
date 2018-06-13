@@ -28,6 +28,7 @@ import org.apache.log4j.Logger;
 import java.security.cert.Certificate;
 import java.util.Collection;
 import java.util.Collections;
+import java.util.Date;
 
 import org.opensaml.saml2.core.Issuer;
 import org.opensaml.saml2.core.Response;
@@ -116,7 +117,6 @@ public class OIOResponse extends OIOAbstractResponse {
 					}
 				}
 				if (!valid) {
-					System.out.println("validateResponse Fail");
 					throw new ValidationException("The assertion is not signed correctly");
 				}
 			}
