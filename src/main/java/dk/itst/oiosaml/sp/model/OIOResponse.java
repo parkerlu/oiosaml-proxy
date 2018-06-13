@@ -117,6 +117,7 @@ public class OIOResponse extends OIOAbstractResponse {
 					}
 				}
 				if (!valid) {
+					System.out.println(new Date() + " validateResponse Fail");
 					throw new ValidationException("The assertion is not signed correctly");
 				}
 			}
