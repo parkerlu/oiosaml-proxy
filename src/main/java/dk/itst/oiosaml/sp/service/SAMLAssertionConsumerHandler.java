@@ -133,8 +133,8 @@ public class SAMLAssertionConsumerHandler implements SAMLHandler {
 		Metadata metadata = ctx.getIdpMetadata().getMetadata(idpEntityId);
 		response.decryptAssertion(ctx.getCredential(), !ctx.getConfiguration().getBoolean(Constants.PROP_REQUIRE_ENCRYPTION, false));
 		
-		// 华为云上docker部署验证不过，时差问题已经排除
-//		response.validateResponse(ctx.getSpMetadata().getAssertionConsumerServiceLocation(0), metadata.getValidCertificates(), allowPassive);
+		// 华为云上docker部署验证不过，docker为centos7 Oracle jdk 8u171时可以正常
+		response.validateResponse(ctx.getSpMetadata().getAssertionConsumerServiceLocation(0), metadata.getValidCertificates(), allowPassive);
 		
 		if (allowPassive && response.isPassive()) {
 			log.debug("Received passive response, setting passive userassertion");
